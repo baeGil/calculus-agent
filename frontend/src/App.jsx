@@ -7,7 +7,10 @@ import { SearchModal, ImageViewer, SettingsModal } from './components/Modals'
 import { Menu, MoreHorizontal } from 'lucide-react'
 import './App.css'
 import GuideTour from './components/GuideTour'
-import defaultAvatar from './assets/pochi.jpeg'
+import pochiAsset from './assets/pochi.jpeg'
+import hnamAsset from './assets/hnam.jpeg'
+
+const defaultAvatar = pochiAsset
 
 const API_BASE = '/api'
 
@@ -38,9 +41,15 @@ function App() {
             try {
                 const profile = JSON.parse(saved)
                 // Migrate old static paths to new hashed assets
-                if (profile.avatar === '/hnam.jpeg' || profile.avatar === '/pochi.jpeg' || profile.avatar.includes('hnam')) {
-                    profile.avatar = defaultAvatar
+                if (profile.avatar === '/pochi.jpeg') {
+                    profile.avatar = pochiAsset
                     localStorage.setItem('user_profile', JSON.stringify(profile))
+                } else if (profile.avatar === '/hnam.jpeg' || (profile.avatar && profile.avatar.includes('hnam'))) {
+                    // Only update if it's the old string path or contains 'hnam' but isn't already the hashed asset path
+                    if (typeof profile.avatar === 'string' && !profile.avatar.startsWith('data:') && !profile.avatar.includes('assets/hnam-')) {
+                        profile.avatar = hnamAsset
+                        localStorage.setItem('user_profile', JSON.stringify(profile))
+                    }
                 }
                 return profile
             } catch (e) {
