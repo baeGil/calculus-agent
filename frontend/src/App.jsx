@@ -9,7 +9,7 @@ import './App.css'
 import GuideTour from './components/GuideTour'
 const pochiAsset = '/pochi.jpeg'
 const hnamAsset = '/hnam.jpeg'
-const defaultAvatar = null // Use circular placeholder by default for Guest
+const defaultAvatar = hnamAsset // Set Hnam as default for Guest as requested
 
 const API_BASE = '/api'
 
@@ -60,7 +60,7 @@ function App() {
         return {
             name: 'Guest',
             email: 'guest@example.com',
-            avatar: null
+            avatar: hnamAsset
         }
     })
 
