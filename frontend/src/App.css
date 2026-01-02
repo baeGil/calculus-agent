@@ -2361,7 +2361,8 @@
 .sidebar-container.closed .profile-name,
 .sidebar-container.closed .profile-plan,
 .sidebar-container.closed .active-indicator,
-.sidebar-container.closed .chat-item-actions {
+.sidebar-container.closed .chat-item-actions,
+.sidebar-container.closed .history-empty {
     opacity: 0;
     pointer-events: none;
     transform: translateX(-15px);
