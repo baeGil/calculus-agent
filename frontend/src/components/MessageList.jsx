@@ -176,7 +176,9 @@ const MessageList = ({
             }
 
             setIsRestored(false)
-            setIsTransitioning(true)
+            // Only set transitioning if we're moving from one real session to another
+            // This prevents "white screen" on new sessions while streaming starts
+            setIsTransitioning(!!prevConversationId.current && !!conversationId)
             prevConversationId.current = conversationId
             prevMessagesLengthRef.current = 0
         }

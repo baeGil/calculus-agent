@@ -23,7 +23,8 @@ function App() {
 
     const [conversations, setConversations] = useState([])
     const [currentConversation, setCurrentConversation] = useState(() => {
-        return localStorage.getItem('lastConversationId') || null
+        const lastId = localStorage.getItem('lastConversationId')
+        return (lastId === 'null' || !lastId) ? null : lastId
     })
     const [messages, setMessages] = useState([])
     const [isLoading, setIsLoading] = useState(false)
@@ -87,6 +88,7 @@ function App() {
     })
     const appRef = useRef(null)
     const isCreatingSessionRef = useRef(false)
+    const isSendingMessageRef = useRef(false) // Track if we're currently sending a message
     const isInitialMountRef = useRef(true) // Track if this is the first mount after refresh
 
     // --- Effects ---
@@ -235,15 +237,19 @@ function App() {
     useEffect(() => {
         if (currentConversation) {
             if (isCreatingSessionRef.current) {
+                // If we JUST created this session, don't clear messages!
+                // The current messages state already contains the optimistic user message.
                 isCreatingSessionRef.current = false
                 return
             }
-            loadMessages(currentConversation)
-            if (currentConversation === 'null') {
-                localStorage.setItem('lastConversationId', 'null')
-            } else {
-                localStorage.setItem('lastConversationId', currentConversation)
+
+            // Skip loading if we're currently sending a message (to prevent race condition)
+            if (isSendingMessageRef.current) {
+                return
             }
+
+            loadMessages(currentConversation)
+            localStorage.setItem('lastConversationId', currentConversation)
         } else {
             setMessages([])
         }
@@ -380,7 +386,7 @@ function App() {
     const createConversation = () => {
         setCurrentConversation(null)
         setMessages([])
-        localStorage.setItem('lastConversationId', 'null') // Persist current null state to prevent jump on refresh
+        localStorage.removeItem('lastConversationId') // Clear instead of setting "null"
         if (window.innerWidth < 768) setSidebarOpen(false)
     }
 
@@ -497,6 +503,8 @@ function App() {
     const sendMessage = async (text, uploadedImages) => {
         const userMessage = text.trim()
         const imagePreviews = uploadedImages.map(img => img.preview)
+        // Set flag to prevent loadMessages from overwriting optimistic updates
+        isSendingMessageRef.current = true
 
         // Optimistic UI update
         setMessages(prev => [...prev, {
@@ -614,6 +622,8 @@ function App() {
             })
         } finally {
             setIsLoading(false)
+            // Clear flag after message sending is complete
+            isSendingMessageRef.current = false
         }
     }
 
