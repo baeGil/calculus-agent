@@ -25,10 +25,10 @@ WORKDIR /app
 COPY backend/ ./backend/
 
 # Create data directory for SQLite and set permissions
-RUN mkdir -p /data && chmod 777 /data
+RUN mkdir -p /app/data && chmod 777 /app/data
 
 # Set environment variables
-ENV DATABASE_URL=sqlite+aiosqlite:///data/algebra_chat.db
+ENV DATABASE_URL=sqlite+aiosqlite:///app/data/algebra_chat.db
 ENV PYTHONPATH=/app
 
 # Expose port
