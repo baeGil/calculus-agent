@@ -7,7 +7,7 @@ import { SearchModal, ImageViewer, SettingsModal } from './components/Modals'
 import { Menu, MoreHorizontal } from 'lucide-react'
 import './App.css'
 import GuideTour from './components/GuideTour'
-import defaultAvatar from './assets/hnam.jpeg'
+import defaultAvatar from './assets/pochi.jpeg'
 
 const API_BASE = '/api'
 
@@ -34,7 +34,20 @@ function App() {
     // User Profile State
     const [userProfile, setUserProfile] = useState(() => {
         const saved = localStorage.getItem('user_profile')
-        return saved ? JSON.parse(saved) : {
+        if (saved) {
+            try {
+                const profile = JSON.parse(saved)
+                // Migrate old static paths to new hashed assets
+                if (profile.avatar === '/hnam.jpeg' || profile.avatar === '/pochi.jpeg' || profile.avatar.includes('hnam')) {
+                    profile.avatar = defaultAvatar
+                    localStorage.setItem('user_profile', JSON.stringify(profile))
+                }
+                return profile
+            } catch (e) {
+                console.error('Failed to parse user_profile', e)
+            }
+        }
+        return {
             name: 'Guest',
             email: 'guest@example.com',
             avatar: defaultAvatar
