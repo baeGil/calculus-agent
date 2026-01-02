@@ -1,3 +1,16 @@
+---
+title: Calculus Agent
+emoji: 📈
+colorFrom: gray
+colorTo: gray
+sdk: docker
+pinned: false
+license: mit
+short_description: Multi-Agent Calculus Orchestration System
+---
+
+Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference
+
 # Pochi 4.o: Multi-Agent Calculus Orchestration System
 
 Pochi is a high-performance, asynchronous AI platform specialized in solving complex calculus problems. It utilizes a stateful multi-agent system built on LangGraph, coordinating multiple specialized LLMs and symbolic computation engines to achieve pedagogical excellence and mathematical precision.
@@ -63,6 +76,7 @@ graph TD
     
     API -.-> Observability
     Executor -.-> Observability
+    
 ```
 
 ## Fault Tolerance and Error Handling
