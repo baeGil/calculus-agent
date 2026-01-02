@@ -1,6 +1,6 @@
 ---
 title: Calculus Agent
-emoji: 📈
+emoji: 🌌
 colorFrom: gray
 colorTo: gray
 sdk: docker
