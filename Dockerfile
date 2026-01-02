@@ -24,8 +24,8 @@ RUN npm ci && npm run build
 WORKDIR /app
 COPY backend/ ./backend/
 
-# Create data directory for SQLite
-RUN mkdir -p /data
+# Create data directory for SQLite and set permissions
+RUN mkdir -p /data && chmod 777 /data
 
 # Set environment variables
 ENV DATABASE_URL=sqlite+aiosqlite:///data/algebra_chat.db
