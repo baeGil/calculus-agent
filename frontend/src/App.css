@@ -2807,6 +2807,7 @@
     color: var(--text-tertiary);
     font-size: 0.85rem;
     font-style: italic;
+    transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1), transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 
