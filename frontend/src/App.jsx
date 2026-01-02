@@ -7,8 +7,8 @@ import { SearchModal, ImageViewer, SettingsModal } from './components/Modals'
 import { Menu, MoreHorizontal } from 'lucide-react'
 import './App.css'
 import GuideTour from './components/GuideTour'
-const pochiAsset = '/pochi.jpeg'
-const hnamAsset = '/hnam.jpeg'
+const pochiAsset = '/assets/pochi.jpeg'
+const hnamAsset = '/assets/hnam.jpeg'
 const defaultAvatar = hnamAsset // Set Hnam as default for Guest as requested
 
 const API_BASE = '/api'
@@ -41,10 +41,10 @@ function App() {
                 const profile = JSON.parse(saved)
                 // Migrate old static paths or broken hashed paths to new stable assets
                 if (profile.avatar && typeof profile.avatar === 'string') {
-                    if (profile.avatar === '/pochi.jpeg' || (profile.avatar.includes('pochi') && profile.avatar !== pochiAsset)) {
+                    if (profile.avatar.includes('pochi') && profile.avatar !== pochiAsset) {
                         profile.avatar = pochiAsset
                         localStorage.setItem('user_profile', JSON.stringify(profile))
-                    } else if (profile.avatar === '/hnam.jpeg' || (profile.avatar.includes('hnam') && profile.avatar !== hnamAsset)) {
+                    } else if (profile.avatar.includes('hnam') && profile.avatar !== hnamAsset) {
                         // Only update if it's an old asset path (not a base64 string)
                         if (!profile.avatar.startsWith('data:')) {
                             profile.avatar = hnamAsset

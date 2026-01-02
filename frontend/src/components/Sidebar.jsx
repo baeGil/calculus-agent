@@ -18,7 +18,7 @@ import {
     PanelLeft,
     PanelRight
 } from 'lucide-react'
-const pochiLogo = '/pochi.jpeg'
+const pochiLogo = '/assets/pochi.jpeg'
 
 const Sidebar = ({
     isOpen,
