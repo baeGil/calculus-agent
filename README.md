@@ -15,6 +15,13 @@ Check out the configuration reference at https://huggingface.co/docs/hub/spaces-
 
 Pochi is a high-performance, asynchronous AI platform specialized in solving complex calculus problems. It utilizes a stateful multi-agent system built on LangGraph, coordinating multiple specialized LLMs and symbolic computation engines to achieve pedagogical excellence and mathematical precision.
 
+## Live Demo
+
+| Platform | URL |
+| :--- | :--- |
+| **Koyeb** | [Visit Pochi on Koyeb](https://organisational-etheline-hnam-13dc7109.koyeb.app) |
+| **Hugging Face** | [Visit Pochi on Hugging Face](https://huggingface.co/spaces/baeGil/calculus-agent) |
+
 ## Highlight Features
 
 - **Multi-Agent Orchestration**: Stateful DAG-based workflow using LangGraph for complex, multi-stage reasoning.
