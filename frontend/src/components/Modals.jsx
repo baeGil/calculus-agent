@@ -26,7 +26,7 @@ export const SearchModal = ({ onSelect, onClose, conversations = [], isRestored 
         const fetchResults = async () => {
             setIsLoading(true)
             try {
-                const res = await fetch(`http://localhost:7860/api/search?q=${encodeURIComponent(debouncedQuery)}`)
+                const res = await fetch(`/api/search?q=${encodeURIComponent(debouncedQuery)}`)
                 if (res.ok) {
                     const data = await res.json()
                     setResults(data)

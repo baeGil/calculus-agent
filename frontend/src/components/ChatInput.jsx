@@ -273,7 +273,7 @@ const ChatInput = ({ onSendMessage, isLoading, onImageClick }) => {
             </div>
 
             <p className="input-hint">
-                AI có thể mắc lỗi. Hãy kiểm tra lại thông tin quan trọng.
+                Pochi không phải lúc nào cũng đúng. Hãy tập thói quen double check nhé!
             </p>
         </div>
     )

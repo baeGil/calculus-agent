@@ -374,7 +374,7 @@ const MessageList = ({
                     </div>
                 </div>
                 <h2>Xin chào, tôi có thể giúp gì?</h2>
-                <p>Tôi là trợ lý AI chuyên về giải tích và toán học.<br />Hãy gửi bài toán hoặc câu hỏi của bạn để bắt đầu.</p>
+                <p>Tôi là Pochi, bạn đồng hành của bạn trong việc chinh phục môn toán giải tích.<br />Hãy bắt đầu bằng việc đặt câu hỏi cho tôi nhé!</p>
                 <div className="example-prompts">
                     <button onClick={() => onExampleClick('Tính đạo hàm của hàm số y = x³ - 3x + 2')}>Tính đạo hàm của hàm số y = x³ - 3x + 2</button>
                     <button onClick={() => onExampleClick('Tính tích phân của hàm số f(x) = sin(x) từ 0 đến π')}>Tính tích phân của hàm số f(x) = sin(x) từ 0 đến π</button>

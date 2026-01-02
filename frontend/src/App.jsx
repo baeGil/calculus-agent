@@ -8,7 +8,7 @@ import { Menu, MoreHorizontal } from 'lucide-react'
 import './App.css'
 import GuideTour from './components/GuideTour'
 
-const API_BASE = 'http://localhost:7860/api'
+const API_BASE = '/api'
 
 function App() {
     // --- State Management ---
