@@ -224,6 +224,10 @@ We welcome contributions! Please follow these steps:
 4.  Push to the branch: `git push origin feature/amazing-feature`.
 5.  Open a Pull Request.
 
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
 ## Acknowledgments
 
 We deeply appreciate the open-source community and the providers of the powerful technologies that make Pochi possible:
