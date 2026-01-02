@@ -7,6 +7,7 @@ import { SearchModal, ImageViewer, SettingsModal } from './components/Modals'
 import { Menu, MoreHorizontal } from 'lucide-react'
 import './App.css'
 import GuideTour from './components/GuideTour'
+import defaultAvatar from './assets/hnam.jpeg'
 
 const API_BASE = '/api'
 
@@ -36,7 +37,7 @@ function App() {
         return saved ? JSON.parse(saved) : {
             name: 'Guest',
             email: 'guest@example.com',
-            avatar: '/hnam.jpeg'
+            avatar: defaultAvatar
         }
     })
 

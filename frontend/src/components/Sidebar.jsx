@@ -18,6 +18,7 @@ import {
     PanelLeft,
     PanelRight
 } from 'lucide-react'
+import pochiLogo from '../assets/pochi.jpeg'
 
 const Sidebar = ({
     isOpen,
@@ -210,7 +211,7 @@ const Sidebar = ({
                 <div className="sidebar-top-nav">
                     <div className="nav-header">
                         <div className="sidebar-brand">
-                            <img src="/pochi.jpeg" alt="Pochi Logo" className="brand-logo" id="tour-logo" />
+                            <img src={pochiLogo} alt="Pochi Logo" className="brand-logo" id="tour-logo" />
                         </div>
                         {isOpen && (
                             <button
