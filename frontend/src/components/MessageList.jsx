@@ -9,6 +9,7 @@ import html2canvas from 'html2canvas'
 import { preprocessLaTeX, parseMessageContent } from '../utils/chatUtils'
 
 import ErrorBoundary from './ErrorBoundary'
+import calculusIcon from '../assets/calculus-icon.png'
 
 const MessageFooter = ({ role, onCopy, onToggleExpand, isExpanded, isOverflow, copiedId, idx, onExportMD, onExportPDF, onExportLaTeX }) => {
     const [showMenu, setShowMenu] = useState(false)
@@ -370,7 +371,7 @@ const MessageList = ({
             <div className="welcome-screen">
                 <div id="tour-chat-interface" className="tour-chat-spotlight"></div>
                 <div className="welcome-icon">
-                    <img src="/calculus-icon.png" alt="Icon" onError={(e) => e.target.style.display = 'none'} />
+                    <img src={calculusIcon} alt="Icon" onError={(e) => e.target.style.display = 'none'} />
                     <div className="p-4 bg-indigo-100 rounded-full dark:bg-indigo-900/30" style={{ display: 'none' }}>
                         <Bot size={48} className="text-indigo-600 dark:text-indigo-400" />
                     </div>
