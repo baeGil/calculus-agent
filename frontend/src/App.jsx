@@ -7,9 +7,8 @@ import { SearchModal, ImageViewer, SettingsModal } from './components/Modals'
 import { Menu, MoreHorizontal } from 'lucide-react'
 import './App.css'
 import GuideTour from './components/GuideTour'
-import pochiAsset from './assets/pochi.jpeg'
-import hnamAsset from './assets/hnam.jpeg'
-
+const pochiAsset = '/pochi.jpeg'
+const hnamAsset = '/hnam.jpeg'
 const defaultAvatar = pochiAsset
 
 const API_BASE = '/api'
@@ -40,15 +39,17 @@ function App() {
         if (saved) {
             try {
                 const profile = JSON.parse(saved)
-                // Migrate old static paths to new hashed assets
-                if (profile.avatar === '/pochi.jpeg') {
-                    profile.avatar = pochiAsset
-                    localStorage.setItem('user_profile', JSON.stringify(profile))
-                } else if (profile.avatar === '/hnam.jpeg' || (profile.avatar && profile.avatar.includes('hnam'))) {
-                    // Only update if it's the old string path or contains 'hnam' but isn't already the hashed asset path
-                    if (typeof profile.avatar === 'string' && !profile.avatar.startsWith('data:') && !profile.avatar.includes('assets/hnam-')) {
-                        profile.avatar = hnamAsset
+                // Migrate old static paths or broken hashed paths to new stable assets
+                if (profile.avatar && typeof profile.avatar === 'string') {
+                    if (profile.avatar === '/pochi.jpeg' || (profile.avatar.includes('pochi') && profile.avatar !== pochiAsset)) {
+                        profile.avatar = pochiAsset
                         localStorage.setItem('user_profile', JSON.stringify(profile))
+                    } else if (profile.avatar === '/hnam.jpeg' || (profile.avatar.includes('hnam') && profile.avatar !== hnamAsset)) {
+                        // Only update if it's an old asset path (not a base64 string)
+                        if (!profile.avatar.startsWith('data:')) {
+                            profile.avatar = hnamAsset
+                            localStorage.setItem('user_profile', JSON.stringify(profile))
+                        }
                     }
                 }
                 return profile
