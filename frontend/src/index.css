@@ -1,0 +1,426 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* KaTeX styles */
+@import 'katex/dist/katex.min.css';
+
+/* =========================================
+   DESIGN SYSTEM & TOKENS
+   ========================================= */
+:root {
+  /* --- LIGHT THEME (Clean, Airy, Professional) --- */
+
+  /* Brand Colors - Indigo/Violet fused for modern tech feel */
+  --brand-primary: #6366f1;
+  --brand-primary-rgb: 99, 102, 241;
+  /* Indigo 500 */
+  --brand-hover: #4f46e5;
+  /* Indigo 600 */
+  --brand-light: #e0e7ff;
+  /* Indigo 100 */
+  --brand-text: #ffffff;
+
+  /* Backgrounds */
+  --bg-canvas: #ffffff;
+  --bg-canvas-rgb: 255, 255, 255;
+  --bg-surface: #f8fafc;
+  --bg-surface-rgb: 248, 250, 252;
+  /* Slate 50 */
+  --bg-surface-hover: #eaeff3;
+  /* Balanced hover: slightly darker than Slate 100, lighter than Slate 200 */
+  --bg-modal: rgba(255, 255, 255, 0.95);
+
+  /* Text */
+  --text-primary: #0f172a;
+  /* Slate 900 */
+  --text-secondary: #64748b;
+  /* Slate 500 */
+  --text-tertiary: #94a3b8;
+  /* Slate 400 */
+
+  /* Borders */
+  --border-light: #e2e8f0;
+  /* Slate 200 */
+  --border-medium: #cbd5e1;
+  /* Slate 300 */
+
+  /* Status */
+  --status-success: #10b981;
+  --status-error: #ef4444;
+  --status-warning: #f59e0b;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-glow: 0 0 20px rgba(99, 102, 241, 0.15);
+
+  /* Legacy variable mapping for compatibility */
+  --bg-primary: var(--bg-canvas);
+  --bg-secondary: var(--bg-surface);
+  --border-color: var(--border-light);
+  --accent: var(--brand-primary);
+}
+
+.dark {
+  /* --- DARK THEME (Deep, Rich, Premium) --- */
+
+  /* Brand Colors - Slightly desaturated for dark mode legibility */
+  --brand-primary: #818cf8;
+  --brand-primary-rgb: 129, 140, 248;
+  /* Indigo 400 */
+  --brand-hover: #6366f1;
+  /* Indigo 500 */
+  --brand-light: rgba(99, 102, 241, 0.15);
+  --brand-text: #ffffff;
+
+  /* Backgrounds - Zinc scale for a rich "Obsidian" feel */
+  --bg-canvas: #09090b;
+  --bg-canvas-rgb: 9, 9, 11;
+  /* Zinc 950 */
+  --bg-surface: #18181b;
+  --bg-surface-rgb: 24, 24, 27;
+  /* Zinc 900 */
+  --bg-surface-hover: #27272a;
+  /* Zinc 800 */
+  --bg-modal: rgba(24, 24, 27, 0.96);
+  /* More solid for better text contrast */
+
+  /* Text */
+  --text-primary: #f4f4f5;
+  /* Zinc 100 */
+  --text-secondary: #a1a1aa;
+  /* Zinc 400 */
+  --text-tertiary: #52525b;
+  /* Zinc 600 */
+
+  /* Borders */
+  --border-light: #27272a;
+  /* Zinc 800 */
+  --border-medium: #3f3f46;
+  /* Zinc 700 */
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.5);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.5);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.5);
+  --shadow-glow: 0 0 25px rgba(129, 140, 248, 0.15);
+
+  /* Legacy mapping */
+  --bg-primary: var(--bg-canvas);
+  --bg-secondary: var(--bg-surface);
+  --border-color: var(--border-light);
+  --accent: var(--brand-primary);
+}
+
+/* =========================================
+   GLOBAL RESET & BASE
+   ========================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  /* App-like feel */
+  overscroll-behavior: none;
+  /* Prevent bounce/rubber-band effect */
+}
+
+body {
+  font-family: 'Outfit', 'Inter', system-ui, sans-serif;
+  /* Outfit for headings, Inter for body */
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  /* Removed transition on color/background to prevent flickering on theme switch */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Selection Highlight */
+::selection {
+  background-color: var(--brand-primary);
+  color: white;
+}
+
+/* Scrollbar Styling - Minimalist */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-light);
+  border-radius: 10px;
+  transition: background 0.2s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-tertiary);
+}
+
+/* =========================================
+   UTILITIES & COMPONENTS
+   ========================================= */
+
+@layer utilities {
+
+  /* Modern Glassmorphism */
+  .glass {
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .dark .glass {
+    background: rgba(10, 10, 12, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-panel {
+    background: var(--bg-modal);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border-light);
+  }
+
+  /* Text Gradients */
+  .text-gradient {
+    background: linear-gradient(135deg, var(--brand-primary), #a855f7);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+/* Markdown / Message Content Styling */
+.message-content {
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+.message-content p {
+  margin-bottom: 0.85rem;
+}
+
+.message-content p:last-child {
+  margin-bottom: 0;
+}
+
+.message-content strong {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.message-content a {
+  color: var(--brand-primary);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--brand-primary);
+  transition: all 0.2s;
+}
+
+.message-content a:hover {
+  border-style: solid;
+}
+
+/* Code Blocks */
+.message-content pre {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  overflow-x: auto;
+  margin: 1.25rem 0;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.message-content code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85em;
+  padding: 0.2em 0.4em;
+  border-radius: 0.25rem;
+  background: var(--bg-surface-hover);
+  color: var(--brand-primary);
+}
+
+.message-content pre code {
+  background: transparent;
+  padding: 0;
+  color: inherit;
+  font-size: 0.9em;
+}
+
+/* Lists */
+.message-content ul,
+.message-content ol {
+  padding-left: 1.5rem;
+  margin: 0.75rem 0;
+}
+
+.message-content li {
+  margin: 0.4rem 0;
+  padding-left: 0.5rem;
+}
+
+/* KaTeX Override (Math) - Minimalist Integrated Look */
+.katex-display {
+  margin: 1.5rem 0;
+  padding: 0.5rem 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  overflow-x: auto;
+  box-shadow: none;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.katex-display:hover {
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.katex {
+  font-size: 1.1em;
+  color: var(--text-primary);
+}
+
+.katex-error {
+  color: var(--status-error);
+  background: rgba(239, 68, 68, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* =========================================
+   ANIMATIONS
+   ========================================= */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes messageSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-msg-slide-up {
+  animation: messageSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Agent Tracking UI Refinements */
+.agent-status-badge {
+  display: inline-flex;
+  align-items: center;
+  background: var(--brand-light);
+  color: var(--brand-primary);
+  padding: 0.35rem 0.85rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  border: 1px solid rgba(var(--brand-primary-rgb), 0.2);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  box-shadow: 0 4px 10px rgba(99, 102, 241, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.agent-status-badge::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: badgeShine 2s infinite;
+}
+
+@keyframes badgeShine {
+  0% {
+    left: -100%;
+  }
+
+  100% {
+    left: 200%;
+  }
+}
+
+.agent-steps {
+  margin-bottom: 1.25rem;
+  font-size: 0.85rem;
+  border: 1px solid var(--border-light);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: var(--bg-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.agent-steps summary {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: color 0.2s;
+  background: var(--bg-secondary);
+}
+
+.agent-steps summary:hover {
+  color: var(--brand-primary);
+}
+
+.steps-list {
+  padding: 0.75rem;
+  gap: 0.75rem;
+}
+
+.step-item {
+  background: var(--bg-canvas);
+  border: 1px solid var(--border-light);
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+}
+
+.step-tool {
+  color: var(--brand-primary);
+}
