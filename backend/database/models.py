@@ -50,6 +50,17 @@ AsyncSessionLocal = async_sessionmaker(engine, class_=AsyncSession, expire_on_co
 
 async def init_db():
     """Initialize database tables."""
+    # Ensure database directory exists
+    if "sqlite" in DATABASE_URL:
+        db_path = DATABASE_URL.replace("sqlite+aiosqlite:///", "").replace("sqlite:///", "")
+        db_dir = os.path.dirname(db_path)
+        if db_dir and not os.path.exists(db_dir):
+            try:
+                os.makedirs(db_dir, exist_ok=True)
+                print(f"Created database directory: {db_dir}")
+            except Exception as e:
+                print(f"Error creating database directory {db_dir}: {e}")
+
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
 
