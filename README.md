@@ -9,7 +9,7 @@ license: mit
 short_description: Multi-Agent Calculus Orchestration System
 ---
 
-Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference
+<!-- Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference -->
 
 # Pochi 4.o: Multi-Agent Calculus Orchestration System
 
@@ -19,8 +19,35 @@ Pochi is a high-performance, asynchronous AI platform specialized in solving com
 
 | Platform | URL |
 | :--- | :--- |
-| **Koyeb** | [Visit Pochi on Koyeb](https://organisational-etheline-hnam-13dc7109.koyeb.app) |
 | **Hugging Face** | [Visit Pochi on Hugging Face](https://huggingface.co/spaces/baeGil/calculus-agent) |
+
+## Project Achievements & Performance
+
+Pochi's performance and reliability are continuously monitored via LangSmith. The following data highlights the system's operational excellence and high-speed reasoning capabilities.
+
+![LangSmith Traces](images/traces.png)
+
+### System Health & Usage
+| Metric | Value | Description |
+| :--- | :--- | :--- |
+| **Total Runs** | 476 | Cumulative successful execution cycles. |
+| **Total Tokens** | 1.86M | Aggregate token throughput across all agents. |
+| **Median Tokens** | 2,846 | Average context size per solver request. |
+| **Success Rate** | 99% | System resilience against API and execution errors. |
+| **Streaming Adoption** | 99% | Percentage of responses delivered via SSE for real-time feedback. |
+
+### Latency Performance
+> Latency varies significantly based on task complexity (e.g., Simple symbolic math vs. Multi-image OCR + Recursive code fixing).
+
+| Stage | P50 (Median) | P99 (Tail) |
+| :--- | :---: | :---: |
+| **Time to First Token (TTFT)** | 0.53s | 5.30s |
+| **End-to-End Latency** | 1.51s | 36.95s |
+
+**Analysis**:
+- **Responsiveness**: A P50 TTFT of **0.53s** ensures that users perceive an "instant" start to the response, crucial for engagement.
+- **Efficiency**: The P50 latency of **1.51s** for full calculus resolution demonstrates the high-performance nature of the asynchronous multi-agent orchestration.
+- **Complexity Buffer**: The P99 latency (**~37s**) accounts for the most intensive "Self-Healing" loops, where the system may perform multiple recursive code fixes or deep vision analysis.
 
 ## Highlight Features
 
