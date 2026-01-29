@@ -1,4 +1,4 @@
-<!-- ---
+---
 title: Calculus Agent
 emoji: 🌌
 colorFrom: gray
@@ -7,9 +7,9 @@ sdk: docker
 pinned: false
 license: mit
 short_description: Multi-Agent Calculus Orchestration System
---- -->
+---
 
-<!-- Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference -->
+Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference
 
 # Pochi 4.o: Multi-Agent Calculus Orchestration System
 
